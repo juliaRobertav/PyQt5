@@ -1,44 +1,35 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
-from PyQt5.QtGui import QFont
 import random
+from PyQt5 import QtGui, uic
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLineEdit, QPushButton, QLabel
 
 
 class Jokenpo(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Pedra, Papel e Tesoura")
-        self.setGeometry(200, 200, 300, 200)
 
         self.label = QLabel("Escolha uma opção:")
         self.label.setFont(QFont("Arial", 12))
 
-        self.btnPedra = QPushButton("Pedra")
-        self.btnPapel = QPushButton("Papel")
-        self.btnTesoura = QPushButton("Tesoura")
-
         layout = QVBoxLayout()
+
+        self.line_edit = QLineEdit()
+        self.button = QPushButton("JOGAR")
+
         layout.addWidget(self.label)
-        layout.addWidget(self.btnPedra)
-        layout.addWidget(self.btnPapel)
-        layout.addWidget(self.btnTesoura)
+        layout.addWidget(self.line_edit)
+        layout.addWidget(self.button)
 
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
-        self.btnPedra.clicked.connect(self.pedra)
-        self.btnPapel.clicked.connect(self.papel)
-        self.btnTesoura.clicked.connect(self.tesoura)
+        self.button.clicked.connect(self.escolha_jogador)
 
-    def pedra(self):
-        self.jogo("pedra")
-
-    def papel(self):
-        self.jogo("papel")
-
-    def tesoura(self):
-        self.jogo("tesoura")
+    def escolha_jogador(self):
+        escolha = self.line_edit.text().lower()
+        self.jogo(escolha)
 
     def jogo(self, escolha):
         choices = ["pedra", "papel", "tesoura"]
@@ -61,9 +52,10 @@ class Jokenpo(QMainWindow):
             return "Você perdeu!"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
-    game = Jokenpo()
-    game.show()
+    tela = uic.loadUi("janelajogo.ui")
+    tela.show()
+    janela = Jokenpo()
     sys.exit(app.exec_())
 
