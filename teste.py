@@ -16,8 +16,8 @@ class Jokenpo(QMainWindow):
         tela = uic.loadUi("janelajogo.ui")
         self.line_edit = tela.findChild(QLineEdit, "lineEdit")
         self.button = tela.findChild(QPushButton, "pushButton")
-        self.button.clicked.connect(self.atualizar_escolha)
         self.label_resultado = tela.findChild(QLabel, "labelResultado")
+        self.button.clicked.connect(self.atualizar_escolha)
         tela.show()
 
     def atualizar_escolha(self):
@@ -62,3 +62,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     jokenpo = Jokenpo()
     sys.exit(app.exec_())
+
