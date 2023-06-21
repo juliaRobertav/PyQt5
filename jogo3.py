@@ -6,29 +6,14 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLi
 
 
 class Jokenpo(QMainWindow):
-    def __init__(self):
+    def __init__(self, ui):
         super().__init__()
+        self.ui = ui
 
-        self.label = QLabel("Escolha uma opção:")
-        self.label.setFont(QFont("Arial", 12))
-
-        layout = QVBoxLayout()
-
-        self.line_edit = QLineEdit()
-        self.button = QPushButton("JOGAR")
-
-        layout.addWidget(self.label)
-        layout.addWidget(self.line_edit)
-        layout.addWidget(self.button)
-
-        widget = QWidget()
-        widget.setLayout(layout)
-        self.setCentralWidget(widget)
-
-        self.button.clicked.connect(self.escolha_jogador)
+        self.ui.button.clicked.connect(self.escolha_jogador)
 
     def escolha_jogador(self):
-        escolha = self.line_edit.text().lower()
+        escolha = self.ui.line_edit.text().lower()
         self.jogo(escolha)
 
     def jogo(self, escolha):
@@ -37,9 +22,10 @@ class Jokenpo(QMainWindow):
 
         result = self.resultado(escolha, jogada)
 
-        self.label.setText(f"Você escolheu: {escolha}\n"
-                           f"O computador escolheu: {jogada}\n"
-                           f"Resultado: {result}")
+        self.ui.label.setText(f"Você escolheu: {escolha}\n"
+                              f"O computador escolheu: {jogada}\n"
+                              f"Resultado: {result}")
+
 
     def resultado(self, escolha, jogada):
         if escolha == jogada:
@@ -55,7 +41,6 @@ class Jokenpo(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     tela = uic.loadUi("janelajogo.ui")
+    janela = Jokenpo(tela)
     tela.show()
-    janela = Jokenpo()
     sys.exit(app.exec_())
-
