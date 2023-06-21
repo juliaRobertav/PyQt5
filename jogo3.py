@@ -1,34 +1,44 @@
 import sys
-import random
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLineEdit, QPushButton, QLabel
+import random
 
 
-class MainWindow(QMainWindow):
+class Jokenpo(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle("Pedra, Papel e Tesoura")
+        self.setGeometry(200, 200, 300, 200)
 
         self.label = QLabel("Escolha uma opção:")
         self.label.setFont(QFont("Arial", 12))
 
+        self.btnPedra = QPushButton("Pedra")
+        self.btnPapel = QPushButton("Papel")
+        self.btnTesoura = QPushButton("Tesoura")
+
         layout = QVBoxLayout()
-
-        self.line_edit = QLineEdit()
-        self.button = QPushButton("JOGAR")
-
         layout.addWidget(self.label)
-        layout.addWidget(self.line_edit)
-        layout.addWidget(self.button)
+        layout.addWidget(self.btnPedra)
+        layout.addWidget(self.btnPapel)
+        layout.addWidget(self.btnTesoura)
 
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
-        self.button.clicked.connect(self.obter_escolha)
+        self.btnPedra.clicked.connect(self.pedra)
+        self.btnPapel.clicked.connect(self.papel)
+        self.btnTesoura.clicked.connect(self.tesoura)
 
-    def obter_escolha(self):
-        escolha = self.line_edit.text().lower()
-        self.jogo(escolha)
+    def pedra(self):
+        self.jogo("pedra")
+
+    def papel(self):
+        self.jogo("papel")
+
+    def tesoura(self):
+        self.jogo("tesoura")
 
     def jogo(self, escolha):
         choices = ["pedra", "papel", "tesoura"]
@@ -51,9 +61,9 @@ class MainWindow(QMainWindow):
             return "Você perdeu!"
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
+    game = Jokenpo()
+    game.show()
     sys.exit(app.exec_())
 
