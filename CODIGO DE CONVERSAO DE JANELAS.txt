@@ -1,3 +1,0 @@
-pip install pyqt5-tools
-
-pyuic5 -x "INPUT.ui" -o "OUTPUT.py"
