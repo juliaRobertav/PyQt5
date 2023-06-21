@@ -1,3 +1,4 @@
+import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QLabel
 from PyQt5 import QtGui, uic
 from random import randint
@@ -7,25 +8,6 @@ class Jokenpo(QMainWindow):
     def __init__(self):
         super().__init__()
         self.jogo()
-
-        self.imagem = QLabel(self)
-        self.imagem.move(400, 200)
-        self.imagem.resize(200, 200)
-        self.imagem.setScaledContents(True)
-        self.imagem.setPixmap(QtGui.QPixmap('pedra.png'))
-
-        self.imagem2 = QLabel(self)
-        self.imagem2.move(100, 200)
-        self.imagem2.resize(200, 200)
-        self.imagem2.setScaledContents(True)
-        self.imagem2.setPixmap(QtGui.QPixmap('papel.png'))
-
-        self.imagem3 = QLabel(self)
-        self.imagem3.move(90, 200)
-        self.imagem3.resize(200, 200)
-        self.imagem3.setScaledContents(True)
-        self.imagem3.setPixmap(QtGui.QPixmap('tesoura.png'))
-
 
     def jogo(self):
         opcoes = ["pedra", "papel", "tesoura"]
@@ -76,8 +58,7 @@ class Jokenpo(QMainWindow):
 
 
 if __name__ == "__main__":
-    import sys
-
+    
     jogo = QApplication(sys.argv)
     tela = uic.loadUi("janelajogo.ui")
     tela.show()
