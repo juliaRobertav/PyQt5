@@ -24,16 +24,11 @@ class MainWindow(QMainWindow):
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
-        self.button.clicked.connect(self.jogo)
+        self.button.clicked.connect(self.obter_escolha)
 
-    def pedra(self):
-        self.jogo("pedra")
-
-    def papel(self):
-        self.jogo("papel")
-
-    def tesoura(self):
-        self.jogo("tesoura")
+    def obter_escolha(self):
+        escolha = self.line_edit.text().lower()
+        self.jogo(escolha)
 
     def jogo(self, escolha):
         choices = ["pedra", "papel", "tesoura"]
@@ -61,3 +56,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+
